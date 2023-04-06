@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Search from '../components/search/Search';
 // import { Link } from 'react-router-dom';
 
 // constants
@@ -19,12 +20,12 @@ const MenuLink = styled.a`
   align-items: center;
   font-size: 16px;
   padding: 12px;
-  margin: 4px 0;
+  margin: 8px 0;
 `;
 const MenuIcon = styled.img`
   width: 22px;
   height: 22px;
-  margin-right: 15px;
+  margin-right: 18px;
 `;
 
 const Menu = () => {
@@ -34,6 +35,8 @@ const Menu = () => {
       {MENU_ITEMS.map((menu) => (
         <MenuItem
           key={menu.key}
+          menuKey={menu.key}
+          isModal={menu.isModal}
           link={menu.url}
           icon={menu.icon}
           label={menu.label}
@@ -43,13 +46,37 @@ const Menu = () => {
   );
 };
 
-const MenuItem = ({ link, icon, label }) => {
+const MenuItem = ({ menuKey, link, icon, label, isModal }) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setShowModal(!showModal);
+  };
   return (
     <StyledMenuItem>
-      <MenuLink href={link}>
-        <MenuIcon src={icon} alt='' />
-        {label}
-      </MenuLink>
+      {isModal ? (
+        menuKey === 'search' ? (
+          <>
+            <MenuLink href='#' onClick={handleSearch}>
+              <MenuIcon src={icon} alt='' />
+              {label}
+            </MenuLink>
+            {showModal && (
+              <Search className={showModal ? 'active' : ''}></Search>
+            )}
+          </>
+        ) : (
+          <MenuLink href='#'>
+            <MenuIcon src={icon} alt='' />
+            {label}
+          </MenuLink>
+        )
+      ) : (
+        <MenuLink href={link}>
+          <MenuIcon src={icon} alt='' />
+          {label}
+        </MenuLink>
+      )}
     </StyledMenuItem>
   );
 };

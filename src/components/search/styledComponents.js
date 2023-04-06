@@ -1,5 +1,26 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import search from '../../assets/icons/search.svg';
+
+const fadeInLeft = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+`;
+const fadeOutLeft = keyframes`
+  0% {
+    opacity: 1;
+    transform: translate(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%);
+  }
+`;
 
 const Input = styled.input`
   background-color: rgb(38, 38, 38);
@@ -20,6 +41,7 @@ const Input = styled.input`
   }
 `;
 const StyleSearch = styled.div`
+  background: #000;
   border-radius: 0 20px 20px 0;
   border-right: 1px solid rgb(38, 38, 38);
   box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
@@ -29,6 +51,11 @@ const StyleSearch = styled.div`
   position: absolute;
   top: 0;
   left: var(--header-width);
+  z-index: 9;
+  animation: 0.5s ${fadeOutLeft} ease-out;
+  &.active {
+    animation: 0.5s ${fadeInLeft} ease-out;
+  }
 `;
 const SearchHead = styled.div`
   border-bottom: 1px solid rgb(38, 38, 38);

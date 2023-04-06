@@ -6,6 +6,7 @@ import logo from '../assets/images/logo.svg';
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
+  background: #000;
   border-right: 1px solid rgb(38, 38, 38);
   height: 100dvh;
   width: var(--header-width);
@@ -13,6 +14,7 @@ const StyledHeader = styled.header`
   position: sticky;
   top: 0;
   left: 0;
+  z-index: 99;
 `;
 
 const StyledLogo = styled.div`

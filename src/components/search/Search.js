@@ -49,7 +49,7 @@ const reducer = (state, action) => {
   }
 };
 
-const Search = () => {
+const Search = ({ className }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const handleFetchData = useRef({});
 
@@ -84,7 +84,7 @@ const Search = () => {
   }, [state.url]);
 
   return (
-    <StyleSearch>
+    <StyleSearch className={className}>
       <SearchHead>
         <SearchHeadTitle>Search</SearchHeadTitle>
         <SearchForm>
